@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Description</th>
+      <th>Prix</th>
+      <th>En Stock</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let produit of produits"
+        [hidden]="produit.qttStock <= 0"
+        [ngClass]="{cheap: produit.prix <= 5}">
+      <td>{{ produit.titre }}</td>
+      <td>{{ produit.description }}</td>
+      <td>{{ produit.enSolde ? produit.prix * 0.5 : produit.prix }}</td>
+      <td>{{ produit.qttStock }}</td>
+      <td>
+        <button (click)="acheter(produit)" *ngIf="produit.qttStock > 5">Acheter</button>
+      </td>
+      <td>
+        <button (click)="mettreEnSolde(produit)">Mettre en solde</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
